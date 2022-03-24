@@ -16,7 +16,7 @@ function App() {
   const {secret,ttl} = values
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+   
     try {
       setLoading(true);
       
@@ -31,9 +31,11 @@ function App() {
       
 if(result.statusCode===201){
   setError('')
+  setLoading(false)
   setSuccess(`secret can be accessed with this url: ${client_url}/${result.data.hash} and will expire in ${result.data.expires_after}`)
 
 }else if(result.statusCode ===400){
+  setLoading(false)
   setSuccess('')
   setError(result.message)
 }
@@ -45,6 +47,7 @@ if(result.statusCode===201){
   const handleChange = (name) => (e) => {
     setValues({ ...values, [name]: e.target.value });
     setError('');
+    setLoading(false)
   };
 
   return (
@@ -77,6 +80,7 @@ if(result.statusCode===201){
   <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
   <p>e.g 1D for 1 day 2D for 2days,1S for 1 sec, 1m for 1 minute,1M for 1 month,1Y for 1 year</p>
 </div>
+{loading && <p>loading...</p>}
              {
                error?(<div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
               
@@ -98,7 +102,7 @@ if(result.statusCode===201){
             
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+            <button type="submit" disabled={loading} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
           </div>
         </div>
       </form>

@@ -17,8 +17,10 @@ export default function SingleSecret() {
     const result = await getSecret(hash)
     
     if(result.statusCode ===200){
+      setLoading(false)
 setSecret(result.data)
     }else if(result.statusCode == 404){
+      setLoading(false)
       setError(result.message)
     }
         }
@@ -27,7 +29,9 @@ setSecret(result.data)
       getSecretWithHash(hash)
     },[hash])
       
-  return (<div className="h-screen bg-gradient-to-r
+  return (<>
+  
+  {loading?(<div>Loading...</div>):(<div className="h-screen bg-gradient-to-r
   from-indigo-600
 
   to-blue-400 py-16 px-16 ">
@@ -51,7 +55,8 @@ setSecret(result.data)
 </div>)}
    
  
-</div> 
+</div> )}
+  </>
 
    
 
