@@ -31,7 +31,7 @@ function App() {
       
 if(result.statusCode===201){
   setError('')
-  setSuccess(`secret can be accessed with this url: ${client_url}/${result.data.hash} and will expire at ${result.data.expires_after}`)
+  setSuccess(`secret can be accessed with this url: ${client_url}/${result.data.hash} and will expire in ${result.data.expires_after}`)
 
 }else if(result.statusCode ===400){
   setSuccess('')
