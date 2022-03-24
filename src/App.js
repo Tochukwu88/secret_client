@@ -4,7 +4,7 @@ import { saveSecret } from "./utils/apiCalls";
 
 
 function App() {
-  const client_url ='http://localhost:3000'
+  const client_url ='https://secret-client.vercel.app'
   const [error,setError] = useState('')
   const [success,setSuccess] = useState('')
   const [loading,setLoading] = useState(false)
@@ -31,7 +31,7 @@ function App() {
       
 if(result.statusCode===201){
   setError('')
-  setSuccess(`secret can be accessed with this url:${client_url}/${result.data.hash} and will expire at ${result.data.expires_after}`)
+  setSuccess(`secret can be accessed with this url: ${client_url}/${result.data.hash} and will expire at ${result.data.expires_after}`)
 
 }else if(result.statusCode ===400){
   setSuccess('')

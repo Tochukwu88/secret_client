@@ -17,7 +17,7 @@ export default function SingleSecret() {
     const result = await getSecret(hash)
     
     if(result.statusCode ===200){
-setSecret(result.data.secretText)
+setSecret(result.data)
     }else if(result.statusCode == 404){
       setError(result.message)
     }
