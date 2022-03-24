@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-const API = 'http://localhost:4001/v1'
+const API = 'https://rapid-secret-server.herokuapp.com/v1'
 
 export const saveSecret = async (data,)=>{
     try {
